@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- custome -->
+  <link rel="stylesheet" href="css/custome.css">
 
   
 </head>
@@ -49,6 +51,7 @@
   <!-- /.content-wrapper -->
 
 @include('admin.components.footer')
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -102,6 +105,65 @@
       "responsive": true,
     });
   });
+  // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+$(document).on("click", ".open-AddBookDialog", function () {
+     var id = $(this).data('id');
+     var user_name = $(this).data('user_name');
+     var package_tag = $(this).data('package_tag');
+     var gift = $(this).data('gift');
+     var status = $(this).data('status');
+     $(".modal-content #id").val( id );
+     $(".modal-content #user_name").val( user_name );
+     $(".modal-content #package_tag").val( package_tag );
+     $(".modal-content #gift").val( gift );
+     $(".modal-content #status").val( status );
+     // As pointed out in comments, 
+     // it is unnecessary to have to manually call the modal.
+     // $('#addBookDialog').modal('show');
+});
+$(document).on('click', '#modal-submit', function(e){
+  var url_update = '{{ route('pelanggan.update') }}';
+  var id = $('#id').val();
+  var status = $('#status').val();
+  console.log("ini status bro "+status);
+  $.ajax({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url:url_update,
+    method:'POST',
+    data:
+    {
+      _token: "{{ csrf_token() }}",
+      id,
+      status,
+    }
+  })
+})
 </script>
 </body>
 </html>

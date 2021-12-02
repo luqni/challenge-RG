@@ -69,8 +69,6 @@
                     <th>Contact Person</th>
                     <th>Contact Number</th>
                     <th>Delivery Address</th>
-                    <th>Order Status</th>
-                    <th>Package Name</th>
                     <th>Gift</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -85,11 +83,15 @@
                     <td>{{$pelanggan->contact_person}}</td>
                     <td>{{$pelanggan->contact_number}}</td>
                     <td>{{$pelanggan->delivery_address}}</td>
-                    <td>{{$pelanggan->order_status}}</td>
-                    <td>{{$pelanggan->package_name}}</td>
                     <td>{{$pelanggan->gift}}</td>
                     <td>{{$pelanggan->status}}</td>
-                    <td></td>
+                    <td><a href="#">
+                            <button type="button" class="open-AddBookDialog btn btn-success" id="myBtn" data-toggle="modal" data-id="{{$pelanggan->id}}" data-user_name="{{$pelanggan->user_name}}" data-package_tag="{{$pelanggan->package_tag}}" 
+                            data-gift="{{$pelanggan->gift}}" data-status="{{$pelanggan->status}}">
+                                                {{ __('Update') }}
+                            </button>
+                        </a>
+                    </td>
                     
                   </tr>
                   @endforeach
@@ -102,8 +104,6 @@
                     <th>Contact Person</th>
                     <th>Contact Number</th>
                     <th>Delivery Address</th>
-                    <th>Order Status</th>
-                    <th>Package Name</th>
                     <th>Gift</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -123,3 +123,37 @@
     </section>
     <!-- /.content -->
   </div>
+  <!-- The Modal -->
+<div id="myModal" class="modal">
+<!-- Modal content -->
+<div class="modal-content">
+  <span class="close">&times;</span>
+  <h2 align="center">Update Status</h2>
+  
+  <input type="hidden" name="id" id="id" value=""/>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text" class="form-control" name="user_name" id="user_name" value="" disabled>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Package Name</label>
+    <input type="text" class="form-control" name="package_tag" id="package_tag" value="" value="" disabled>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Gift</label>
+    <input type="text" class="form-control" name="gift" id="gift" value="" value="" disabled>
+  </div>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select class="custom-select form-control-border" id="status">
+      <option value="created">Created</option>
+      <option value="delivery">Delivery</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  </div>
+  <div class="card-footer">
+      <button type="submit" id="modal-submit" class="btn btn-info">Update</button>
+    </div>
+</div>
+
+</div>

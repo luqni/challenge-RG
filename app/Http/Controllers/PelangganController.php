@@ -46,4 +46,10 @@ class PelangganController extends Controller
 
         return redirect()->route('form')->withStatus(__('Cabang successfully created.'));
     }
+
+    public function update(Request $request)
+    {
+        dd($request->id);
+        return view('home.layout');
+    }
 }
