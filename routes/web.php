@@ -29,4 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return redirect()->route('form');
 })->name('dashboard');
 
-Route::post('/UpdatePelanggan', 'App\Http\Controllers\PelangganController@update')->name('pelanggan.update');
+
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::post('/UpdatePelanggan', 'App\Http\Controllers\PelangganController@update')->name('pelanggan.update');
+});

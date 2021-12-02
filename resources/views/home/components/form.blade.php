@@ -133,7 +133,7 @@ async function fetchUser() {
                         location.reload();
                         alert("Submit Berhasil");
                     }
-                    alert("Submit Gagagl!");
+                    
 
                 })
             })
